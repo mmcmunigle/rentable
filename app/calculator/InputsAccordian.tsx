@@ -1,4 +1,4 @@
-import { Accordion, Button, Stack, Text } from "@mantine/core";
+import { Accordion, Button, Flex, Stack, Text } from "@mantine/core";
 import PropertyForm from "./inputs/PropertyForm";
 import PurchaseInfoForm from "./inputs/PurchaseInfoForm";
 import LoanDetailsForm from "./inputs/LoanForm";
@@ -24,7 +24,10 @@ const InputsAccordian = () => {
       <Accordion variant="contained" defaultValue="purchase">
         <Accordion.Item value="purchase">
           <Accordion.Control>
-            <Text fw={700}>Purchase Price & Costs</Text>
+            <Flex>
+              <Text fw={700}>Purchase Price & Costs</Text>
+              {!purchase && <Text c="red">*</Text>}
+            </Flex>
           </Accordion.Control>
           <Accordion.Panel>
             <PurchaseInfoForm />
@@ -33,7 +36,10 @@ const InputsAccordian = () => {
 
         <Accordion.Item value="loan">
           <Accordion.Control>
-            <Text fw={700}>Loan Details</Text>
+            <Flex>
+              <Text fw={700}>Loan Details</Text>
+              {!loan && <Text c="red">*</Text>}
+            </Flex>
           </Accordion.Control>
           <Accordion.Panel>
             <LoanDetailsForm />
@@ -42,7 +48,10 @@ const InputsAccordian = () => {
 
         <Accordion.Item value="rental">
           <Accordion.Control>
-            <Text fw={700}>Rental Info</Text>
+            <Flex>
+              <Text fw={700}>Rental Info</Text>
+              {!rental && <Text c="red">*</Text>}
+            </Flex>
           </Accordion.Control>
           <Accordion.Panel>
             <RentalInfoForm />
@@ -51,7 +60,10 @@ const InputsAccordian = () => {
 
         <Accordion.Item value="assumptions">
           <Accordion.Control>
-            <Text fw={700}>Assumptions</Text>
+            <Flex>
+              <Text fw={700}>Assumptions</Text>
+              {!assumptions && <Text c="red">*</Text>}
+            </Flex>
           </Accordion.Control>
           <Accordion.Panel>
             <AssumptionsForm />

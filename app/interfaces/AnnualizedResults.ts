@@ -1,4 +1,4 @@
-interface AnnualizedResults {
+export interface AnnualizedResults {
   year: number;
   totalAnnualIncome: number;
   totalAnnualExpenses: number;

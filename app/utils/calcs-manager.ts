@@ -1,3 +1,4 @@
+import { AnnualizedResults } from "../interfaces/AnnualizedResults";
 import { Assumptions } from "../interfaces/Assumptions";
 import { LoanDetails } from "../interfaces/LoanDetails";
 import { PurchaseInfo } from "../interfaces/PurchaseInfo";

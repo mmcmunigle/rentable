@@ -5,7 +5,7 @@ import CalculatorContainer from "./CalculatorContainer";
 const CalculatorPage = () => {
   return (
     <Stack>
-      <Title order={1} p={10}>
+      <Title order={1} pb={10}>
         Investment Calculator
       </Title>
       <CalculatorContainer />

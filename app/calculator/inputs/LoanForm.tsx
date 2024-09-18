@@ -4,7 +4,7 @@ import { Button, NativeSelect, NumberInput, Stack } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import React, { useEffect } from "react";
 
-const LOCAL_STORAGE_KEY = "calc-purchase";
+const LOCAL_STORAGE_KEY = "calc-loan";
 
 const LoanDetailsForm = () => {
   const setLoan = useInputsStore((store) => store.setLoan);

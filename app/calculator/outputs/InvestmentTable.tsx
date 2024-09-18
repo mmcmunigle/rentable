@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { AnnualizedResults } from "@/app/interfaces/AnnualizedResults";
+import useResultsStore from "@/app/state-managment/results-store";
 import {
   Accordion,
-  Box,
+  Checkbox,
   ScrollArea,
+  SimpleGrid,
   Stack,
   Table,
   Text,
-  Checkbox,
-  Group,
-  SimpleGrid,
 } from "@mantine/core";
-import useResultsStore from "@/app/state-managment/results-store";
-
-// type ColumnNames = keyof typeof AnnualizedResults
+import { useEffect, useState } from "react";
 
 const InvestmentTable = () => {
   const annualizedData = useResultsStore((store) => store.annualized);
@@ -39,7 +36,7 @@ const InvestmentTable = () => {
     if (columnVisbility) setVisibleColumns(JSON.parse(columnVisbility));
   }, []);
 
-  const handleCheckboxChange = (column: any) => {
+  const handleCheckboxChange = (column: keyof AnnualizedResults) => {
     const newColumnVisibility = {
       ...visibleColumns,
       [column]: !visibleColumns[column],
@@ -51,7 +48,8 @@ const InvestmentTable = () => {
     );
   };
 
-  if (!annualizedData) return <Text>Complete and Submit Form</Text>;
+  if (!annualizedData)
+    return <Text>Complete Forms and Submit to View Results</Text>;
 
   const rows = annualizedData.map((row, index) => (
     <Table.Tr key={index}>
