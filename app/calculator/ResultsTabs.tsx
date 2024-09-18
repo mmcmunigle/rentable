@@ -1,5 +1,4 @@
-import { Divider, Tabs, Text, Title } from "@mantine/core";
-import React from "react";
+import { Tabs, Title } from "@mantine/core";
 import InvestmentTable from "./outputs/InvestmentTable";
 import ResultsSummary from "./outputs/ResultsSummary";
 

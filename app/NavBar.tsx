@@ -2,7 +2,7 @@
 import { Button, Group, Paper, Text } from "@mantine/core";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 import logo from "./assets/logo.png";
 
 const NavBar = () => {
@@ -24,7 +24,7 @@ const NavBar = () => {
 };
 
 const NavLinks = () => {
-  const currentPath = usePathname();
+  // const currentPath = usePathname();
 
   const links = [
     { label: "Calculator", href: "/calculator" },

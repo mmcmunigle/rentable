@@ -42,7 +42,12 @@ const LoanDetailsForm = () => {
   useEffect(() => {
     const data = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (data) {
-      const loanInfo = JSON.parse(data);
+      const loanRaw = JSON.parse(data);
+      const loanInfo = {
+        ...loanRaw,
+        cashPurchase: loanRaw.cashPurchase ? "Yes" : "No",
+        interestOnly: loanRaw.interestOnly ? "Yes" : "No",
+      };
       form.setValues(loanInfo);
       setLoan(loanInfo);
     }
@@ -54,7 +59,11 @@ const LoanDetailsForm = () => {
 
   const handleSubmit = (values: typeof form.values) => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(values));
-    setLoan(values);
+    setLoan({
+      ...values,
+      cashPurchase: values.cashPurchase === "Yes",
+      interestOnly: values.interestOnly === "Yes",
+    });
   };
 
   return (

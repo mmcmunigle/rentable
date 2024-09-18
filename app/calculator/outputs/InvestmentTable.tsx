@@ -41,7 +41,7 @@ const InvestmentTable = () => {
       ...visibleColumns,
       [column]: !visibleColumns[column],
     };
-    setVisibleColumns((prev) => newColumnVisibility);
+    setVisibleColumns(() => newColumnVisibility);
     localStorage.setItem(
       "table-columns-vis",
       JSON.stringify(newColumnVisibility)

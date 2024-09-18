@@ -1,5 +1,4 @@
-import { Stack, Text, Title } from "@mantine/core";
-import React from "react";
+import { Stack, Title } from "@mantine/core";
 import CalculatorContainer from "./CalculatorContainer";
 
 const CalculatorPage = () => {

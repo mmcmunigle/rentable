@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { ResultsSummary } from "../interfaces/ResultsSummary";
+import { AnnualizedResults } from "../interfaces/AnnualizedResults";
 
 interface ResultsStore {
   results?: ResultsSummary;
