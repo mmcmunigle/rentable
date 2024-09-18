@@ -21,16 +21,7 @@ const InputsAccordian = () => {
 
   return (
     <Stack>
-      <Accordion variant="contained" defaultValue="property">
-        <Accordion.Item value="property">
-          <Accordion.Control>
-            <Text fw={700}>Property Details</Text>
-          </Accordion.Control>
-          <Accordion.Panel>
-            <PropertyForm />
-          </Accordion.Panel>
-        </Accordion.Item>
-
+      <Accordion variant="contained" defaultValue="purchase">
         <Accordion.Item value="purchase">
           <Accordion.Control>
             <Text fw={700}>Purchase Price & Costs</Text>
@@ -64,6 +55,15 @@ const InputsAccordian = () => {
           </Accordion.Control>
           <Accordion.Panel>
             <AssumptionsForm />
+          </Accordion.Panel>
+        </Accordion.Item>
+
+        <Accordion.Item value="property">
+          <Accordion.Control>
+            <Text fw={700}>Property Details</Text>
+          </Accordion.Control>
+          <Accordion.Panel>
+            <PropertyForm />
           </Accordion.Panel>
         </Accordion.Item>
       </Accordion>
