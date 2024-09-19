@@ -9,7 +9,7 @@ const NavBar = () => {
   return (
     <nav>
       <Paper shadow="md" px="lg">
-        <Group justify="space-between" align="center" px="xl" py="sm">
+        <Group justify="space-between" align="center" px="xl" py="xs">
           <Group align="center" gap="lg">
             <Link href="/">
               <Image src={logo} width="50" height="50" alt="" />
