@@ -3,6 +3,7 @@ import useResultsStore from "@/app/state-managment/results-store";
 import {
   Accordion,
   Checkbox,
+  NumberFormatter,
   ScrollArea,
   SimpleGrid,
   Stack,
@@ -55,41 +56,117 @@ const InvestmentTable = () => {
     <Table.Tr key={index}>
       {visibleColumns.year && <Table.Td>{row.year}</Table.Td>}
       {visibleColumns.totalAnnualIncome && (
-        <Table.Td>{row.totalAnnualIncome.toFixed(2).toLocaleString()}</Table.Td>
+        <Table.Td>
+          {
+            <NumberFormatter
+              prefix="$"
+              value={row.totalAnnualIncome.toFixed(2)}
+              thousandSeparator
+            />
+          }
+        </Table.Td>
       )}
       {visibleColumns.totalAnnualExpenses && (
         <Table.Td>
-          {row.totalAnnualExpenses.toFixed(2).toLocaleString()}
+          {
+            <NumberFormatter
+              prefix="$"
+              value={row.totalAnnualExpenses.toFixed(2)}
+              thousandSeparator
+            />
+          }
         </Table.Td>
       )}
       {visibleColumns.annualPropertyTax && (
-        <Table.Td>{row.annualPropertyTax.toFixed(2).toLocaleString()}</Table.Td>
+        <Table.Td>
+          {
+            <NumberFormatter
+              prefix="$"
+              value={row.annualPropertyTax.toFixed(2)}
+              thousandSeparator
+            />
+          }
+        </Table.Td>
       )}
       {visibleColumns.operatingExpenses && (
-        <Table.Td>{row.operatingExpenses.toFixed(2).toLocaleString()}</Table.Td>
+        <Table.Td>
+          {
+            <NumberFormatter
+              prefix="$"
+              value={row.operatingExpenses.toFixed(2)}
+              thousandSeparator
+            />
+          }
+        </Table.Td>
       )}
       {visibleColumns.mortgagePayment && (
-        <Table.Td>{row.mortgagePayment.toFixed(2).toLocaleString()}</Table.Td>
+        <Table.Td>
+          {
+            <NumberFormatter
+              prefix="$"
+              value={row.mortgagePayment.toFixed(2)}
+              thousandSeparator
+            />
+          }
+        </Table.Td>
       )}
       {visibleColumns.totalAnnualCashflow && (
         <Table.Td>
-          {row.totalAnnualCashflow.toFixed(2).toLocaleString()}
+          {
+            <NumberFormatter
+              prefix="$"
+              value={row.totalAnnualCashflow.toFixed(2)}
+              thousandSeparator
+            />
+          }
         </Table.Td>
       )}
       {visibleColumns.cashOnCashROI && (
         <Table.Td>{(row.cashOnCashROI * 100).toFixed(2)}%</Table.Td>
       )}
       {visibleColumns.propertyValue && (
-        <Table.Td>{row.propertyValue.toFixed(2).toLocaleString()}</Table.Td>
+        <Table.Td>
+          {
+            <NumberFormatter
+              prefix="$"
+              value={row.propertyValue.toFixed(2)}
+              thousandSeparator
+            />
+          }
+        </Table.Td>
       )}
       {visibleColumns.equity && (
-        <Table.Td>{row.equity.toFixed(2).toLocaleString()}</Table.Td>
+        <Table.Td>
+          {
+            <NumberFormatter
+              prefix="$"
+              value={row.equity.toFixed(2)}
+              thousandSeparator
+            />
+          }
+        </Table.Td>
       )}
       {visibleColumns.loanBalance && (
-        <Table.Td>{row.loanBalance.toFixed(2).toLocaleString()}</Table.Td>
+        <Table.Td>
+          {
+            <NumberFormatter
+              prefix="$"
+              value={row.loanBalance.toFixed(2)}
+              thousandSeparator
+            />
+          }
+        </Table.Td>
       )}
       {visibleColumns.profitIfSold && (
-        <Table.Td>{row.profitIfSold.toFixed(2).toLocaleString()}</Table.Td>
+        <Table.Td>
+          {
+            <NumberFormatter
+              prefix="$"
+              value={row.profitIfSold.toFixed(2)}
+              thousandSeparator
+            />
+          }
+        </Table.Td>
       )}
       {visibleColumns.annualizedTotalReturn && (
         <Table.Td>{(row.annualizedTotalReturn * 100).toFixed(2)}%</Table.Td>
@@ -104,7 +181,7 @@ const InvestmentTable = () => {
           striped
           highlightOnHover
           withTableBorder
-          horizontalSpacing="md"
+          horizontalSpacing="sm"
           stickyHeader
           h={100}
         >

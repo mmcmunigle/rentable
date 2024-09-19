@@ -1,8 +1,12 @@
+import DollarPrefixIcon from "@/app/components/DollarPrefixIcon";
+import PercentPrefixIcon from "@/app/components/PercentPrefixIcon";
 import TooltipIcon from "@/app/components/TooltipIcon";
 import useInputsStore from "@/app/state-managment/inputs-store";
 import { Button, NativeSelect, NumberInput, Stack } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
+import { prefixStyle } from "./styles";
+import { FaCheck, FaRegSave } from "react-icons/fa";
 
 const LOCAL_STORAGE_KEY = "calc-loan";
 
@@ -20,22 +24,37 @@ const LoanDetailsForm = () => {
       interestOnly: "No",
       amortizationYears: 30,
       capRate: 0,
-      // Add other fields with their initial values
     },
     validate: {
-      downPaymentPercentage: (value) =>
-        value < 0 || value > 100 ? "Must be between 0 and 100" : null,
-      loanInterestRate: (value) =>
-        value < 0 ? "Must be a positive percentage" : null,
+      downPaymentPercentage: (value, values) =>
+        value < 0 || value > 100
+          ? "Must be between 0 and 100"
+          : (values.cashPurchase === "No" && value === undefined) ||
+            (values.cashPurchase === "No" && value.toString() === "")
+          ? "Down Payment is required"
+          : null,
+      loanInterestRate: (value, values) =>
+        value < 0 || value > 100
+          ? "Must be a positive percentage"
+          : (values.cashPurchase === "No" && value === undefined) ||
+            (values.cashPurchase === "No" && value.toString() === "")
+          ? "Loan Interest Rate is required"
+          : null,
       pointsChargedByLender: (value) =>
         value < 0 ? "Must be a positive number" : null,
       otherChargesFromLender: (value) =>
         value < 0 ? "Must be a positive number" : null,
       loanFeesAndPoints: (value) =>
         value < 0 ? "Must be a positive number" : null,
-      amortizationYears: (value) =>
-        value <= 0 ? "Must be a positive number" : null,
-      capRate: (value) => (value < 0 ? "Must be a positive percentage" : null),
+      amortizationYears: (value, values) =>
+        value <= 0
+          ? "Must be a positive number"
+          : (values.cashPurchase === "No" && value === undefined) ||
+            (values.cashPurchase === "No" && value.toString() === "")
+          ? "Amortization Years is required"
+          : null,
+      capRate: (value) =>
+        value < 0 || value > 100 ? "Must be a positive percentage" : null,
     },
   });
 
@@ -43,13 +62,8 @@ const LoanDetailsForm = () => {
     const data = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (data) {
       const loanRaw = JSON.parse(data);
-      const loanInfo = {
-        ...loanRaw,
-        cashPurchase: loanRaw.cashPurchase ? "Yes" : "No",
-        interestOnly: loanRaw.interestOnly ? "Yes" : "No",
-      };
-      form.setValues(loanInfo);
-      setLoan(loanInfo);
+      form.setValues(loanRaw);
+      setLoan(loanRaw);
     }
   }, []);
 
@@ -64,6 +78,7 @@ const LoanDetailsForm = () => {
       cashPurchase: values.cashPurchase === "Yes",
       interestOnly: values.interestOnly === "Yes",
     });
+    form.resetDirty();
   };
 
   return (
@@ -86,12 +101,14 @@ const LoanDetailsForm = () => {
           disabled={isCashPurchase()}
           label={
             <TooltipIcon
-              label="Down Payment (%)"
+              label="Down Payment"
               tooltip="How much money do you plan to put toward the purchase of this property?"
             />
           }
-          placeholder="Enter down payment percentage"
+          placeholder="Down payment percentage"
           {...form.getInputProps("downPaymentPercentage")}
+          leftSection={<PercentPrefixIcon />}
+          leftSectionProps={{ style: prefixStyle }}
         />
 
         {/* Loan Interest Rate (%) */}
@@ -99,12 +116,14 @@ const LoanDetailsForm = () => {
           disabled={isCashPurchase()}
           label={
             <TooltipIcon
-              label="Loan Interest Rate (%)"
+              label="Loan Interest Rate"
               tooltip="What rate do you think you'll get on your loan?"
             />
           }
-          placeholder="Enter loan interest rate"
+          placeholder="Loan interest rate"
           {...form.getInputProps("loanInterestRate")}
+          leftSection={<PercentPrefixIcon />}
+          leftSectionProps={{ style: prefixStyle }}
         />
 
         {/* Points Charged by Lender */}
@@ -113,10 +132,10 @@ const LoanDetailsForm = () => {
           label={
             <TooltipIcon
               label="Points Charged by Lender"
-              tooltip="Often when you take out a loan, you will pay 'points.' Enter how many points."
+              tooltip="Often when you take out a loan, you will pay 'points.' how many points."
             />
           }
-          placeholder="Enter points charged by lender"
+          placeholder="Points charged by lender"
           {...form.getInputProps("pointsChargedByLender")}
         />
 
@@ -125,12 +144,15 @@ const LoanDetailsForm = () => {
           disabled={isCashPurchase()}
           label={
             <TooltipIcon
-              label="Other Charges From Lender ($)"
+              label="Other Charges From Lender"
               tooltip="Are there any other fees that the lender will charge?"
             />
           }
-          placeholder="Enter other charges from the lender"
+          placeholder="Other charges"
           {...form.getInputProps("otherChargesFromLender")}
+          thousandSeparator=","
+          leftSection={<DollarPrefixIcon />}
+          leftSectionProps={{ style: prefixStyle }}
         />
 
         {/* Loan Fees & Points */}
@@ -142,7 +164,7 @@ const LoanDetailsForm = () => {
               tooltip="For the purpose of this calculation, would you like to wrap loan fees/points into the loan?"
             />
           }
-          placeholder="Enter loan fees and points"
+          placeholder="Loan fees and points"
           {...form.getInputProps("loanFeesAndPoints")}
         />
 
@@ -168,7 +190,7 @@ const LoanDetailsForm = () => {
               tooltip="How long do you expect the term length to be on your loan?"
             />
           }
-          placeholder="Enter amortization period"
+          placeholder="Amortization period"
           {...form.getInputProps("amortizationYears")}
         />
 
@@ -177,18 +199,21 @@ const LoanDetailsForm = () => {
           disabled={isCashPurchase()}
           label={
             <TooltipIcon
-              label="Typical Cap Rate for Your Area (%)"
+              label="Typical Cap Rate for Your Area"
               tooltip="The Cap Rate (Capitalization Rate) is a unit of measurement for the expected rate of return on a real estate investment property."
             />
           }
-          placeholder="Enter cap rate"
+          placeholder="Cap rate"
           {...form.getInputProps("capRate")}
+          leftSection={<PercentPrefixIcon />}
+          leftSectionProps={{ style: prefixStyle }}
         />
 
         {/* Add more fields as necessary */}
 
         <Button type="submit" variant="outline">
-          Save
+          Save {form.isDirty() && <FaRegSave style={{ marginLeft: "10px" }} />}
+          {!form.isDirty() && <FaCheck style={{ marginLeft: "10px" }} />}
         </Button>
       </Stack>
     </form>

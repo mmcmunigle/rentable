@@ -1,8 +1,11 @@
+import DollarPrefixIcon from "@/app/components/DollarPrefixIcon";
 import TooltipIcon from "@/app/components/TooltipIcon";
 import useInputsStore from "@/app/state-managment/inputs-store";
 import { Button, NumberInput, Stack } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useEffect } from "react";
+import { prefixStyle } from "./styles";
+import { FaCheck, FaRegSave } from "react-icons/fa";
 
 const LOCAL_STORAGE_KEY = "calc-purchase";
 
@@ -16,19 +19,38 @@ const PurchaseInfoForm = () => {
       afterRepairValue: 750000,
       purchaseClosingCost: 20000,
       estimatedRepairCost: 0,
-      // Add other fields with their initial values
     },
     validate: {
       purchasePrice: (value: number) =>
-        value <= 0 ? "Purchase Price must be positive" : null,
+        value <= 0
+          ? "Purchase Price must be positive"
+          : value === undefined || value.toString() === ""
+          ? "Purchase Price is required"
+          : null,
       annualPropertyTaxes: (value: number) =>
-        value < 0 ? "Annual Property Taxes must be positive" : null,
+        value < 0
+          ? "Annual Property Taxes must be positive"
+          : value === undefined || value.toString() === ""
+          ? "Annual Property Taxes is required"
+          : null,
       afterRepairValue: (value: number) =>
-        value <= 0 ? "After Repair Value must be positive" : null,
+        value <= 0
+          ? "After Repair Value must be positive"
+          : value === undefined || value.toString() === ""
+          ? "After Repair Value is required"
+          : null,
       purchaseClosingCost: (value: number) =>
-        value < 0 ? "Purchase Closing Cost must be positive" : null,
+        value < 0
+          ? "Purchase Closing Cost must be positive"
+          : value === undefined || value.toString() === ""
+          ? "Closing Cost is required"
+          : null,
       estimatedRepairCost: (value: number) =>
-        value < 0 ? "Estimated Repair Cost must be positive" : null,
+        value < 0
+          ? "Estimated Repair Cost must be positive"
+          : value === undefined || value.toString() === ""
+          ? "Repair Cost is required"
+          : null,
       // Add other fields validation as necessary
     },
   });
@@ -45,6 +67,7 @@ const PurchaseInfoForm = () => {
   const handleSubmit = (values: typeof form.values) => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(values));
     setPurchase(values);
+    form.resetDirty();
   };
 
   return (
@@ -60,6 +83,9 @@ const PurchaseInfoForm = () => {
           }
           placeholder="Enter purchase price"
           {...form.getInputProps("purchasePrice")}
+          thousandSeparator=","
+          leftSection={<DollarPrefixIcon />}
+          leftSectionProps={{ style: prefixStyle }}
         />
 
         {/* Annual Property Taxes */}
@@ -72,6 +98,9 @@ const PurchaseInfoForm = () => {
           }
           placeholder="Enter annual property taxes"
           {...form.getInputProps("annualPropertyTaxes")}
+          thousandSeparator=","
+          leftSection={<DollarPrefixIcon />}
+          leftSectionProps={{ style: prefixStyle }}
         />
 
         {/* After Repair Value */}
@@ -84,6 +113,9 @@ const PurchaseInfoForm = () => {
           }
           placeholder="Enter after repair value"
           {...form.getInputProps("afterRepairValue")}
+          thousandSeparator=","
+          leftSection={<DollarPrefixIcon />}
+          leftSectionProps={{ style: prefixStyle }}
         />
 
         {/* Purchase Closing Cost */}
@@ -96,6 +128,9 @@ const PurchaseInfoForm = () => {
           }
           placeholder="Enter purchase closing cost"
           {...form.getInputProps("purchaseClosingCost")}
+          thousandSeparator=","
+          leftSection={<DollarPrefixIcon />}
+          leftSectionProps={{ style: prefixStyle }}
         />
 
         {/* Estimated Repair Cost */}
@@ -108,12 +143,16 @@ const PurchaseInfoForm = () => {
           }
           placeholder="Enter estimated repair cost"
           {...form.getInputProps("estimatedRepairCost")}
+          thousandSeparator=","
+          leftSection={<DollarPrefixIcon />}
+          leftSectionProps={{ style: prefixStyle }}
         />
 
         {/* Add more fields as necessary */}
 
         <Button type="submit" variant="outline">
-          Save
+          Save {form.isDirty() && <FaRegSave style={{ marginLeft: "10px" }} />}
+          {!form.isDirty() && <FaCheck style={{ marginLeft: "10px" }} />}
         </Button>
       </Stack>
     </form>

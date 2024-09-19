@@ -32,3 +32,8 @@ a {
 label {
   width: 100%;
 }
+
+
+.mantine-LineChart-axisLabel {
+  margin: 30px;
+}

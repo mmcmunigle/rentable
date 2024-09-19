@@ -1,8 +1,11 @@
+import DollarPrefixIcon from "@/app/components/DollarPrefixIcon";
 import TooltipIcon from "@/app/components/TooltipIcon";
 import useInputsStore from "@/app/state-managment/inputs-store";
 import { Button, NumberInput, Stack } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import React, { useEffect } from "react";
+import { prefixStyle } from "./styles";
+import { FaCheck, FaRegSave } from "react-icons/fa";
 
 const LOCAL_STORAGE_KEY = "calc-rental";
 
@@ -22,18 +25,53 @@ const RentalInfoForm = () => {
     },
     validate: {
       totalGrossMonthlyRent: (value) =>
-        value < 0 ? "Must be a positive number" : null,
+        value < 0
+          ? "Must be a positive number"
+          : value === undefined || value.toString() === ""
+          ? "Purchase Price is required"
+          : null,
       otherMonthlyIncome: (value) =>
-        value < 0 ? "Must be a positive number" : null,
-      electricity: (value) => (value < 0 ? "Must be a positive number" : null),
-      garbage: (value) => (value < 0 ? "Must be a positive number" : null),
+        value < 0
+          ? "Must be a positive number"
+          : value === undefined || value.toString() === ""
+          ? "Other Income is required"
+          : null,
+      electricity: (value) =>
+        value < 0
+          ? "Must be a positive number"
+          : value === undefined || value.toString() === ""
+          ? "Electricity is required"
+          : null,
+      garbage: (value) =>
+        value < 0
+          ? "Must be a positive number"
+          : value === undefined || value.toString() === ""
+          ? "Garbage is required"
+          : null,
       waterAndSewer: (value) =>
-        value < 0 ? "Must be a positive number" : null,
-      hoas: (value) => (value < 0 ? "Must be a positive number" : null),
+        value < 0
+          ? "Must be a positive number"
+          : value === undefined || value.toString() === ""
+          ? "Water & Sewer is required"
+          : null,
+      hoas: (value) =>
+        value < 0
+          ? "Must be a positive number"
+          : value === undefined || value.toString() === ""
+          ? "HOAS is required"
+          : null,
       monthlyInsurance: (value) =>
-        value < 0 ? "Must be a positive number" : null,
+        value < 0
+          ? "Must be a positive number"
+          : value === undefined || value.toString() === ""
+          ? "Monthly Insurance is required"
+          : null,
       otherMonthlyExpenses: (value) =>
-        value < 0 ? "Must be a positive number" : null,
+        value < 0
+          ? "Must be a positive number"
+          : value === undefined || value.toString() === ""
+          ? "Other Expenses is required"
+          : null,
     },
   });
 
@@ -49,6 +87,7 @@ const RentalInfoForm = () => {
   const handleSubmit = (values: typeof form.values) => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(values));
     setRental(values);
+    form.resetDirty();
   };
 
   return (
@@ -64,6 +103,9 @@ const RentalInfoForm = () => {
           }
           placeholder="Enter total monthly rent"
           {...form.getInputProps("totalGrossMonthlyRent")}
+          thousandSeparator=","
+          leftSection={<DollarPrefixIcon />}
+          leftSectionProps={{ style: prefixStyle }}
         />
 
         {/* Other Monthly Income */}
@@ -76,6 +118,9 @@ const RentalInfoForm = () => {
           }
           placeholder="Enter other monthly income"
           {...form.getInputProps("otherMonthlyIncome")}
+          thousandSeparator=","
+          leftSection={<DollarPrefixIcon />}
+          leftSectionProps={{ style: prefixStyle }}
         />
 
         {/* Electricity */}
@@ -83,6 +128,9 @@ const RentalInfoForm = () => {
           label="Electricity"
           placeholder="Enter monthly electricity cost"
           {...form.getInputProps("electricity")}
+          thousandSeparator=","
+          leftSection={<DollarPrefixIcon />}
+          leftSectionProps={{ style: prefixStyle }}
         />
 
         {/* Garbage */}
@@ -90,6 +138,9 @@ const RentalInfoForm = () => {
           label="Garbage"
           placeholder="Enter monthly garbage cost"
           {...form.getInputProps("garbage")}
+          thousandSeparator=","
+          leftSection={<DollarPrefixIcon />}
+          leftSectionProps={{ style: prefixStyle }}
         />
 
         {/* Water & Sewer */}
@@ -97,6 +148,9 @@ const RentalInfoForm = () => {
           label="Water & Sewer"
           placeholder="Enter monthly water and sewer cost"
           {...form.getInputProps("waterAndSewer")}
+          thousandSeparator=","
+          leftSection={<DollarPrefixIcon />}
+          leftSectionProps={{ style: prefixStyle }}
         />
 
         {/* HOAs */}
@@ -104,6 +158,9 @@ const RentalInfoForm = () => {
           label="HOAs"
           placeholder="Enter monthly HOA fees"
           {...form.getInputProps("hoas")}
+          thousandSeparator=","
+          leftSection={<DollarPrefixIcon />}
+          leftSectionProps={{ style: prefixStyle }}
         />
 
         {/* Monthly Insurance */}
@@ -111,6 +168,9 @@ const RentalInfoForm = () => {
           label="Monthly Insurance"
           placeholder="Enter monthly insurance cost"
           {...form.getInputProps("monthlyInsurance")}
+          thousandSeparator=","
+          leftSection={<DollarPrefixIcon />}
+          leftSectionProps={{ style: prefixStyle }}
         />
 
         {/* Other Monthly Expenses */}
@@ -118,10 +178,14 @@ const RentalInfoForm = () => {
           label="Other Monthly Expenses"
           placeholder="Enter other monthly expenses"
           {...form.getInputProps("otherMonthlyExpenses")}
+          thousandSeparator=","
+          leftSection={<DollarPrefixIcon />}
+          leftSectionProps={{ style: prefixStyle }}
         />
 
         <Button type="submit" variant="outline">
-          Save
+          Save {form.isDirty() && <FaRegSave style={{ marginLeft: "10px" }} />}
+          {!form.isDirty() && <FaCheck style={{ marginLeft: "10px" }} />}
         </Button>
       </Stack>
     </form>

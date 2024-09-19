@@ -140,6 +140,7 @@ export function calculateTopLevelReturns(
 export function calculateAnnualizedResults(
   results: ResultsSummary,
   assumptions: Assumptions,
+  loan: LoanDetails,
   purchase: PurchaseInfo
 ): AnnualizedResults[] {
   const annualized: AnnualizedResults[] = [];
@@ -192,8 +193,8 @@ export function calculateAnnualizedResults(
 
     const loanBalance = calculateLoanBalance(
       results.loanAmount,
-      assumptions.loanInterestRate / 100,
-      assumptions.amortizationLength,
+      loan.loanInterestRate / 100,
+      loan.amortizationYears,
       year
     );
 

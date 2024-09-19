@@ -3,6 +3,7 @@ import "@mantine/core/styles.css";
 import React from "react";
 import { theme } from "../theme";
 import "./globals.css";
+import "@mantine/charts/styles.css";
 import NavBar from "./NavBar";
 
 export const metadata = {

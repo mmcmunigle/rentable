@@ -3,6 +3,7 @@ import useInputsStore from "@/app/state-managment/inputs-store";
 import { Button, Stack, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useEffect } from "react";
+import { FaCheck, FaRegSave } from "react-icons/fa";
 
 const LOCAL_STORAGE_KEY = "calc-property";
 
@@ -45,6 +46,7 @@ const PropertyInfoForm = () => {
   const handleSubmit = (values: typeof form.values) => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(values));
     setProperty(values);
+    form.isDirty();
   };
 
   return (
@@ -115,7 +117,8 @@ const PropertyInfoForm = () => {
         />
 
         <Button type="submit" variant="outline">
-          Save
+          Save {form.isDirty() && <FaRegSave style={{ marginLeft: "10px" }} />}
+          {!form.isDirty() && <FaCheck style={{ marginLeft: "10px" }} />}
         </Button>
       </Stack>
     </form>

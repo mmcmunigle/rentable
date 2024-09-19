@@ -34,18 +34,6 @@ const InputsAccordian = () => {
           </Accordion.Panel>
         </Accordion.Item>
 
-        <Accordion.Item value="loan">
-          <Accordion.Control>
-            <Flex>
-              <Text fw={700}>Loan Details</Text>
-              {!loan && <Text c="red">*</Text>}
-            </Flex>
-          </Accordion.Control>
-          <Accordion.Panel>
-            <LoanDetailsForm />
-          </Accordion.Panel>
-        </Accordion.Item>
-
         <Accordion.Item value="rental">
           <Accordion.Control>
             <Flex>
@@ -55,6 +43,18 @@ const InputsAccordian = () => {
           </Accordion.Control>
           <Accordion.Panel>
             <RentalInfoForm />
+          </Accordion.Panel>
+        </Accordion.Item>
+
+        <Accordion.Item value="loan">
+          <Accordion.Control>
+            <Flex>
+              <Text fw={700}>Loan Details</Text>
+              {!loan && <Text c="red">*</Text>}
+            </Flex>
+          </Accordion.Control>
+          <Accordion.Panel>
+            <LoanDetailsForm />
           </Accordion.Panel>
         </Accordion.Item>
 
@@ -94,6 +94,7 @@ const InputsAccordian = () => {
           const annualized = calculateAnnualizedResults(
             results,
             assumptions!,
+            loan!,
             purchase!
           );
           setAnnualized(annualized);
