@@ -1,9 +1,8 @@
-import React from "react";
-import { DonutChart, DonutChartCell, PieChart } from "@mantine/charts";
 import useInputsStore from "@/app/state-managment/inputs-store";
-import { Label, Legend } from "recharts";
-import { Center, Stack, Text } from "@mantine/core";
 import useResultsStore from "@/app/state-managment/results-store";
+import { DonutChartCell, PieChart } from "@mantine/charts";
+import { Center, Stack, Text } from "@mantine/core";
+import { Legend } from "recharts";
 
 const ExpensesDonutChart = () => {
   const rentalInfo = useInputsStore((store) => store.rental);

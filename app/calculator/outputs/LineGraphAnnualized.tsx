@@ -7,7 +7,7 @@ const AnnualizedLineGraph = () => {
 
   if (!annualizedResults) return;
 
-  const data: any[] = annualizedResults.map((results) => {
+  const data: object[] = annualizedResults.map((results) => {
     return {
       year: results.year,
       "Cash on Cash ROI (%)": parseFloat(results.cashOnCashROI.toFixed(3)),

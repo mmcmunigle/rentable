@@ -1,8 +1,7 @@
 import useInputsStore from "@/app/state-managment/inputs-store";
 import useResultsStore from "@/app/state-managment/results-store";
 import { BarChart } from "@mantine/charts";
-import { Center, Stack, Text, Title } from "@mantine/core";
-import React from "react";
+import { Center, Stack, Text } from "@mantine/core";
 
 const BarChartCashFlow = () => {
   const results = useResultsStore((store) => store.results);
