@@ -1,14 +1,6 @@
 import ResultField from "@/app/components/ResultField";
 import useResultsStore from "@/app/state-managment/results-store";
-import {
-  Box,
-  Divider,
-  Group,
-  NumberFormatter,
-  SimpleGrid,
-  Text,
-} from "@mantine/core";
-import React from "react";
+import { Box, Divider, NumberFormatter, SimpleGrid, Text } from "@mantine/core";
 
 const ResultsSummary = () => {
   const results = useResultsStore((store) => store.results);
