@@ -14,11 +14,14 @@ const BarChartCashFlow = () => {
   const convertToMonthlySpend = (percent: number): number =>
     (percent / 100) * rental.totalGrossMonthlyRent;
 
+  const utilitiesTotal = () =>
+    rental.electricity + rental.garbage + rental.waterAndSewer;
+
   const data = [
     {
       type: "Income",
       Rent: rental.totalGrossMonthlyRent,
-      Other: rental.otherMonthlyIncome,
+      "Other Income": rental.otherMonthlyIncome,
     },
     {
       type: "Expenses",
@@ -31,11 +34,9 @@ const BarChartCashFlow = () => {
       "Management Fees": convertToMonthlySpend(assumptions.managementFees),
       "Capital Exp": convertToMonthlySpend(assumptions.capitalExpenditures),
       "Principle & Interest": parseInt(results.monthlyPI.toString()),
-      Electric: rental.electricity,
-      Garbage: rental.garbage,
-      "Water & Sewage": rental.waterAndSewer,
+      Utilities: utilitiesTotal(),
       HOA: rental.hoas,
-      Other: rental.otherMonthlyExpenses,
+      "Other Expenses": rental.otherMonthlyExpenses,
     },
   ];
 
@@ -50,21 +51,20 @@ const BarChartCashFlow = () => {
           withXAxis
           dataKey="type"
           type="stacked"
+          tooltipProps={{ wrapperStyle: { zIndex: 100 } }}
           series={[
             { name: "Principle & Interest", color: "green" },
             { name: "Rent", color: "blue" },
-            { name: "Other", color: "violet" },
-            { name: "Insurance", color: "pink" },
+            { name: "Other Income", color: "violet" },
+            { name: "Insurance", color: "indigo" },
             { name: "Property Tax", color: "yellow" },
             { name: "Repairs & Maint", color: "red" },
             { name: "Vacancy", color: "grape" },
             { name: "Management Fees", color: "gray" },
             { name: "Capital Exp", color: "orange" },
-            { name: "Electric", color: "dark" },
-            { name: "Garbage", color: "blue" },
-            { name: "Water & Sewage", color: "lime" },
+            { name: "Utilities", color: "blue" },
             { name: "HOA", color: "cyan" },
-            { name: "Other", color: "indigo" },
+            { name: "Other Expenses", color: "pink" },
           ]}
         />
       </Stack>

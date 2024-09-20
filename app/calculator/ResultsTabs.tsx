@@ -1,7 +1,7 @@
 import { Center, Group, Stack, Tabs, Title } from "@mantine/core";
 import InvestmentTable from "./outputs/InvestmentTable";
 import ResultsSummary from "./outputs/ResultsSummary";
-import ExpensesDonutChart from "./outputs/DonutChatExpenses";
+import PieChartExpenses from "./outputs/PieChartExpenses";
 import AnnualizedLineGraph from "./outputs/LineGraphAnnualized";
 import BarChartCashFlow from "./outputs/BarChartCashFlow";
 
@@ -20,7 +20,7 @@ const ResultsTabs = () => {
         <Center>
           <Group mb="xl" gap="xl">
             <BarChartCashFlow />
-            <ExpensesDonutChart />
+            <PieChartExpenses />
           </Group>
         </Center>
 

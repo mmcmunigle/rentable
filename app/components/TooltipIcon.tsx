@@ -16,14 +16,14 @@ const TooltipIcon = ({ label, tooltip, link }: Props) => {
         {label}
       </Text>
       {!link && (
-        <Tooltip label={tooltip}>
+        <Tooltip label={tooltip} multiline maw={400}>
           <ActionIcon radius={10} size="xs">
             <FaCircleInfo />
           </ActionIcon>
         </Tooltip>
       )}
       {link && (
-        <Tooltip label={tooltip}>
+        <Tooltip label={tooltip} multiline maw={400}>
           <NavLink
             p={0}
             w="20px"

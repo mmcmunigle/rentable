@@ -60,7 +60,7 @@ const InvestmentTable = () => {
           {
             <NumberFormatter
               prefix="$"
-              value={row.totalAnnualIncome.toFixed(2)}
+              value={row.totalAnnualIncome.toFixed(0)}
               thousandSeparator
             />
           }
@@ -71,7 +71,7 @@ const InvestmentTable = () => {
           {
             <NumberFormatter
               prefix="$"
-              value={row.totalAnnualExpenses.toFixed(2)}
+              value={row.totalAnnualExpenses.toFixed(0)}
               thousandSeparator
             />
           }
@@ -82,7 +82,7 @@ const InvestmentTable = () => {
           {
             <NumberFormatter
               prefix="$"
-              value={row.annualPropertyTax.toFixed(2)}
+              value={row.annualPropertyTax.toFixed(0)}
               thousandSeparator
             />
           }
@@ -93,7 +93,7 @@ const InvestmentTable = () => {
           {
             <NumberFormatter
               prefix="$"
-              value={row.operatingExpenses.toFixed(2)}
+              value={row.operatingExpenses.toFixed(0)}
               thousandSeparator
             />
           }
@@ -104,7 +104,7 @@ const InvestmentTable = () => {
           {
             <NumberFormatter
               prefix="$"
-              value={row.mortgagePayment.toFixed(2)}
+              value={row.mortgagePayment.toFixed(0)}
               thousandSeparator
             />
           }
@@ -115,7 +115,7 @@ const InvestmentTable = () => {
           {
             <NumberFormatter
               prefix="$"
-              value={row.totalAnnualCashflow.toFixed(2)}
+              value={row.totalAnnualCashflow.toFixed(0)}
               thousandSeparator
             />
           }
@@ -129,7 +129,7 @@ const InvestmentTable = () => {
           {
             <NumberFormatter
               prefix="$"
-              value={row.propertyValue.toFixed(2)}
+              value={row.propertyValue.toFixed(0)}
               thousandSeparator
             />
           }
@@ -140,7 +140,7 @@ const InvestmentTable = () => {
           {
             <NumberFormatter
               prefix="$"
-              value={row.equity.toFixed(2)}
+              value={row.equity.toFixed(0)}
               thousandSeparator
             />
           }
@@ -151,7 +151,7 @@ const InvestmentTable = () => {
           {
             <NumberFormatter
               prefix="$"
-              value={row.loanBalance.toFixed(2)}
+              value={row.loanBalance.toFixed(0)}
               thousandSeparator
             />
           }
@@ -162,7 +162,7 @@ const InvestmentTable = () => {
           {
             <NumberFormatter
               prefix="$"
-              value={row.profitIfSold.toFixed(2)}
+              value={row.profitIfSold.toFixed(0)}
               thousandSeparator
             />
           }
