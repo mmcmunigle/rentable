@@ -232,7 +232,7 @@ const InvestmentTable = () => {
             <Text fw={700}>Show / Hide Columns</Text>
           </Accordion.Control>
           <Accordion.Panel>
-            <SimpleGrid cols={5}>
+            <SimpleGrid cols={{ base: 2, md: 5 }}>
               <Checkbox
                 label="Year"
                 checked={visibleColumns.year}

@@ -7,10 +7,10 @@ import InputsAccordian from "./InputsAccordian";
 const CalculatorContainer = () => {
   return (
     <Grid gutter="xl">
-      <Grid.Col span={3}>
+      <Grid.Col span={{ base: 12, md: 3 }}>
         <InputsAccordian />
       </Grid.Col>
-      <Grid.Col span={9}>
+      <Grid.Col span={{ base: 12, md: 9 }}>
         <ResultsTabs />
       </Grid.Col>
     </Grid>

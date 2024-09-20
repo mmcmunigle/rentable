@@ -9,7 +9,7 @@ const ResultsSummary = () => {
 
   return (
     <Box>
-      <SimpleGrid cols={5} p={10}>
+      <SimpleGrid cols={{ base: 2, sm: 5 }} p={10}>
         <Box>
           <ResultField
             field="Monthly Income"
@@ -74,7 +74,7 @@ const ResultsSummary = () => {
         </Box>
       </SimpleGrid>
       <Divider />
-      <SimpleGrid cols={5} p={10} mt={10}>
+      <SimpleGrid cols={{ base: 2, sm: 5 }} p={10} mt={10}>
         <Box>
           <ResultField
             field="Total Cash Needed"
