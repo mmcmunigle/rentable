@@ -28,7 +28,7 @@ const NavLinks = () => {
 
   const links = [
     { label: "Calculator", href: "/calculator" },
-    { label: "About Us", href: "/about" },
+    // { label: "About Us", href: "/about" },
   ];
 
   return (
